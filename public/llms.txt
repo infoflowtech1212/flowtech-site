@@ -1,0 +1,20 @@
+# FlowTech
+
+> Business strategy consulting for real estate investment and operations teams. Strategy first. Systems that follow.
+
+FlowTech delivers systems integration, workflow automation, data analytics, inventory and asset management, custom software, and AI under one engagement, layered onto the platforms clients already use (Yardi, AppFolio, monday.com, Salesforce, Microsoft 365, and others) rather than replacing them.
+
+Founder & Principal: Prashanth Rayapudi, who has spent more than 25 years running real estate operations as both an owner and an operator, across hospitality, multifamily, and single family, overseeing portfolios representing $5 billion in assets.
+
+## Site
+
+- [Homepage](https://flowtechapps.com/): Overview, capabilities, case studies, products, founder background, FAQ
+- [Case Studies](https://flowtechapps.com/case-studies): Engagements in asset transitions, unit lifecycle workflow, purchasing programs, and analytics/dashboards
+
+## Products
+
+A dedicated arm of FlowTech develops its own proprietary software, which can be added to a client's operation or used as the basis for custom builds:
+
+- [DocCreate](https://doccreate.io): Automated document creation with e-signatures, cloud sync, and image capture (monday.com marketplace)
+- [QR Trax](https://qrtrax.com): QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history
+- [PRISM](https://prismpm.ai): Property intelligence system, a full operating system for real estate teams (coming soon)

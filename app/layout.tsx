@@ -16,10 +16,13 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.flowtechapps.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flowtechapps.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+  },
   title: {
     default: "FlowTech — Real Estate Strategy, Built & Implemented",
     template: "%s · FLOWTECH",

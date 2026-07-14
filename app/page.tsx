@@ -1,5 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import StructuredData from "@/components/StructuredData";
 import Journey from "@/components/journey/Journey";
 import IntroStrip from "@/components/home/IntroStrip";
 import Capabilities from "@/components/home/Capabilities";
@@ -12,6 +13,7 @@ import ContactSection from "@/components/home/ContactSection";
 export default function HomePage() {
   return (
     <main id="top">
+      <StructuredData />
       <SiteNav variant="home" />
 
       {/* 3D scroll journey (chapters 0–4) */}

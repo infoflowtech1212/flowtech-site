@@ -34,7 +34,7 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
     >
       <div className="flex items-center justify-between px-6 py-3.5 md:px-[60px]">
         <Link href={base || "#top"} className="flex items-center gap-3 text-lightText">
-          <Image src="/assets/ft-logo.png" alt="FlowTech" width={96} height={26} className="h-[26px] w-auto" />
+          <Image src="/assets/ft-logo.png" alt="FlowTech" width={96} height={26} className="h-[26px] w-auto" priority />
           <span className="text-[15px] font-bold tracking-[.08em]">FLOWTECH</span>
         </Link>
         <div className="hidden gap-[26px] text-[13px] font-medium min-[900px]:flex">

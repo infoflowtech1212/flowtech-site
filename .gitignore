@@ -5,3 +5,6 @@ out
 .DS_Store
 # Ignore standalone HTML file
 FlowTech Website (Standalone).html
+
+# Local SEO audit report (not part of the site/repo deliverable)
+/SEO audit/

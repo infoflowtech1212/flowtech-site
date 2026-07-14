@@ -70,16 +70,37 @@ function Row({ label, body }: { label: string; body: string }) {
   );
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flowtechapps.com";
+
+const caseStudiesSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  url: `${siteUrl}/case-studies`,
+  name: "Case Studies · FlowTech",
+  isPartOf: { "@id": `${siteUrl}/#website` },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${siteUrl}/case-studies` },
+    ],
+  },
+};
+
 export default function CaseStudiesPage() {
   return (
     <main className="bg-dark-cs text-lightText">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudiesSchema) }}
+      />
       {/* Sticky dark nav (case-studies variant per prototype) */}
       <div
         className="sticky top-0 z-50 flex items-center justify-between border-b border-white/[.08] px-6 py-[22px] backdrop-blur-[8px] md:px-[72px]"
         style={{ background: "rgba(14,21,23,.92)" }}
       >
         <Link href="/" className="flex items-center gap-3 text-lightText">
-          <Image src="/assets/ft-logo.png" alt="FlowTech" width={110} height={30} className="h-[30px] w-auto" />
+          <Image src="/assets/ft-logo.png" alt="FlowTech" width={110} height={30} className="h-[30px] w-auto" priority />
           <span className="text-[17px] font-bold tracking-[.06em]">FLOWTECH</span>
         </Link>
         <div className="hidden gap-8 text-[14px] font-medium md:flex">
@@ -113,9 +134,9 @@ export default function CaseStudiesPage() {
           <div className="mb-5 text-[12.5px] font-semibold uppercase tracking-[.18em] text-teal-bright">
             Case Studies
           </div>
-          <div className="max-w-[820px] text-[36px] font-semibold leading-[1.12] [text-wrap:pretty] md:text-[52px]">
+          <h1 className="max-w-[820px] text-[36px] font-semibold leading-[1.12] [text-wrap:pretty] md:text-[52px]">
             We ran the operations we now modernize.
-          </div>
+          </h1>
           <div className="mt-[22px] max-w-[620px] text-[17px] leading-[1.65] text-[rgba(238,243,244,.6)] [text-wrap:pretty]">
             Engagements with real estate investment and operations teams, from development through
             management. We value our clients&#39; confidentiality; the work speaks for itself. Each
