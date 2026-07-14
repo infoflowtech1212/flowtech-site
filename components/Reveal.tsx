@@ -31,12 +31,37 @@ export default function Reveal({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
+    // Touch/narrow-viewport devices are typically scrolled with fast flicks —
+    // the desktop pacing (wide blur, slow tween, late trigger) reads as
+    // "stuck blurry" content on mobile because it doesn't have time to
+    // resolve before the section scrolls past. Trigger earlier, over a wider
+    // window, with a lighter/faster animation so it reliably finishes.
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches;
+
     let tween: gsap.core.Tween;
     if (hero) {
       tween = gsap.fromTo(
         el,
         { opacity: 0, y: 40, filter: "blur(8px)" },
         { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.1, delay: 0.25, ease: "power2.out" },
+      );
+    } else if (isCoarse) {
+      tween = gsap.fromTo(
+        el,
+        { opacity: 0, y: 30, filter: "blur(4px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.45,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el.parentElement ?? el,
+            start: "top 95%",
+            end: "top 55%",
+            toggleActions: "play none none reverse",
+          },
+        },
       );
     } else {
       tween = gsap.fromTo(
