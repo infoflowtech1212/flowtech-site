@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: auto; /* per prototype: scrub owns the scroll feel */
+}
+
+body {
+  margin: 0;
+  background: #04090c;
+  color: #eef3f4;
+  font-family: Aptos, var(--font-onest), "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---- 3D journey chapter typography (verbatim from prototype) ---- */
+.ch-eyebrow {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #2fd4e6;
+}
+.ch-title {
+  font-size: 52px;
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #ffffff 30%, rgba(160, 225, 233, 0.72));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-wrap: pretty;
+  margin: 0;
+}
+.ch-body {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: rgba(238, 243, 244, 0.68);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ch-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(47, 212, 230, 0.35);
+  border-radius: 99px;
+  padding: 8px 18px;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #2fd4e6;
+  background: rgba(6, 14, 17, 0.55);
+  backdrop-filter: blur(6px);
+}
+.ch-scrim {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8, 14, 17, 0.72) 40%,
+    rgba(8, 14, 17, 0) 100%
+  );
+  border-radius: 24px;
+}
+
+@media (max-width: 900px) {
+  .ch-title { font-size: 38px; }
+  .ch-title--hero { font-size: 46px !important; }
+  .ch-title--finale { font-size: 42px !important; }
+}
+
+/* FAQ accordion: hide native disclosure marker (prototype uses a "+" glyph) */
+details.faq summary { list-style: none; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq[open] summary .faq-plus { transform: rotate(45deg); }
+.faq-plus { transition: transform 0.2s; display: inline-block; }
+
+/* Light-sheet reveal initial state (GSAP animates in; reduced motion shows immediately) */
+[data-anim] { will-change: opacity, transform; }
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] { opacity: 1 !important; transform: none !important; filter: none !important; }
+}

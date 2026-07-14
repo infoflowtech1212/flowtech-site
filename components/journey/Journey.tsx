@@ -1,0 +1,123 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { Canvas } from "@react-three/fiber";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setProgress } from "./scrollState";
+import { useJourneyMode } from "./useJourneyMode";
+import ProgressRail from "./ProgressRail";
+import { ChapterHero, Chapter1, Chapter2, Chapter3, Chapter4 } from "./Chapters";
+
+const JourneyScene = dynamic(() => import("./Scene"), { ssr: false });
+
+/**
+ * The scroll-driven 3D journey (chapters 0–4).
+ * - Fixed full-viewport canvas at z-0, radial vignette at z-1, HTML chapter
+ *   overlays at z-10, progress rail at z-50.
+ * - A master ScrollTrigger (scrub 1.2) maps scroll over the journey height to
+ *   progress 0→1 — the single source of truth for camera, grade, arcs, labels,
+ *   and the rail.
+ * - Below 768px, on low-power devices, or with prefers-reduced-motion, the
+ *   WebGL scene is replaced by a static hero and the same chapter copy as
+ *   plain scroll sections.
+ */
+export default function Journey() {
+  const mode = useJourneyMode();
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  // master scrub — only when the 3D journey is live
+  useEffect(() => {
+    if (mode !== "3d") return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const st = ScrollTrigger.create({
+      start: 0,
+      end: () => {
+        const last = document.querySelector<HTMLElement>('[data-chapter="4"]');
+        if (last) return Math.max(1, last.offsetTop + last.offsetHeight - window.innerHeight);
+        return Math.max(1, document.body.scrollHeight - window.innerHeight);
+      },
+      scrub: 1.2,
+      onUpdate: (self) => setProgress(self.progress),
+    });
+
+    // recompute ranges once final layout is in place
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+    const t = setTimeout(() => ScrollTrigger.refresh(), 2000);
+
+    return () => {
+      window.removeEventListener("load", onLoad);
+      clearTimeout(t);
+      st.kill();
+    };
+  }, [mode]);
+
+  // Until the client decides, render nothing journey-specific below the hero
+  // copy to avoid a WebGL flash on devices that will fall back.
+  if (mode === "fallback") return <FallbackJourney />;
+
+  return (
+    <div ref={wrapRef}>
+      {mode === "3d" && (
+        <>
+          <div className="fixed inset-0 z-0">
+            <Canvas
+              dpr={[1, 2]}
+              gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true }}
+              camera={{ fov: 55, near: 0.1, far: 300, position: [24, 290, 132] }}
+            >
+              <JourneyScene />
+            </Canvas>
+          </div>
+          {/* radial vignette above the canvas */}
+          <div
+            className="pointer-events-none fixed inset-0 z-[1]"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 120%, transparent 40%, rgba(4,9,12,.5) 100%)",
+            }}
+          />
+          <ProgressRail />
+        </>
+      )}
+      <ChapterHero />
+      <Chapter1 />
+      <Chapter2 />
+      <Chapter3 />
+      <Chapter4 />
+    </div>
+  );
+}
+
+/**
+ * Static journey for mobile / low-power / reduced-motion: dark hero with a
+ * subtle teal atmosphere, then the same client-approved chapter copy as
+ * ordinary scroll sections.
+ */
+function FallbackJourney() {
+  return (
+    <div className="relative overflow-hidden bg-dark-journey">
+      {/* static atmosphere in place of the WebGL scene */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 50% at 85% 12%, rgba(18,55,78,.85) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 70% 40% at 15% 80%, rgba(0,151,169,.22) 0%, transparent 65%)," +
+            "radial-gradient(ellipse at 50% 120%, transparent 40%, rgba(4,9,12,.5) 100%)",
+        }}
+      />
+      <div className="relative">
+        <ChapterHero overlay={false} />
+        <Chapter1 overlay={false} />
+        <Chapter2 overlay={false} />
+        <Chapter3 overlay={false} />
+        <Chapter4 overlay={false} />
+      </div>
+    </div>
+  );
+}
