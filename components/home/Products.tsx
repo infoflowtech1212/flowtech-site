@@ -18,8 +18,8 @@ const products = [
     badge: "platform",
     badgeMuted: false,
     body: "QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history.",
-    url: "https://qrtrax.com",
-    label: "qrtrax.com →",
+    url: "https://qrtrax.io",
+    label: "qrtrax.io →",
     logoRounded: true,
   },
   {

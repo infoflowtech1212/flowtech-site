@@ -84,7 +84,7 @@ export default function PrivacyPage() {
       <LegalSection heading="8. Third-party links">
         <p className="m-0">
           The Site may link to third-party websites, including our product sites (doccreate.io,
-          qrtrax.com, prismpm.ai). Those sites have their own privacy policies, and we are not
+          qrtrax.io, prismpm.ai). Those sites have their own privacy policies, and we are not
           responsible for their practices.
         </p>
       </LegalSection>

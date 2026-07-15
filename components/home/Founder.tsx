@@ -34,7 +34,7 @@ export default function Founder() {
           <p className="m-0 max-w-[680px] text-[15px] leading-[1.75] text-body [text-wrap:pretty]">
             Prashanth Rayapudi has spent more than 25 years running real estate operations as both
             an owner and an operator, across hospitality, multifamily, and single family:
-            overseeing portfolios representing $5 billion in assets, developing teams, and building
+            overseeing portfolios representing billions in assets, developing teams, and building
             systems that keep businesses performing at their best. Along the way, he discovered
             that technology isn&#39;t just a support tool; it&#39;s a catalyst for transformation.
           </p>

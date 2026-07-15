@@ -16,5 +16,5 @@ Founder & Principal: Prashanth Rayapudi, who has spent more than 25 years runnin
 A dedicated arm of FlowTech develops its own proprietary software, which can be added to a client's operation or used as the basis for custom builds:
 
 - [DocCreate](https://doccreate.io): Automated document creation with e-signatures, cloud sync, and image capture (monday.com marketplace)
-- [QR Trax](https://qrtrax.com): QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history
+- [QR Trax](https://qrtrax.io): QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history
 - [PRISM](https://prismpm.ai): Property intelligence system, a full operating system for real estate teams (coming soon)

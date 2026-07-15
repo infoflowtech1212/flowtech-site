@@ -58,7 +58,7 @@ export default function TermsPage() {
       <LegalSection heading="6. Products and third-party sites">
         <p className="m-0">
           Our proprietary products (including DocCreate, QR Trax, and PRISM) are offered under
-          their own terms on their own sites (doccreate.io, qrtrax.com, prismpm.ai). Links to
+          their own terms on their own sites (doccreate.io, qrtrax.io, prismpm.ai). Links to
           third-party websites are provided for convenience; we are not responsible for their
           content or practices.
         </p>

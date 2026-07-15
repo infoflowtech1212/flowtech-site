@@ -20,7 +20,7 @@ export default function HomePage() {
       <Journey />
 
       {/* Light sheet: the site opens into daylight, sliding over the 3D world */}
-      <div className="relative z-10 mt-[6vh] overflow-hidden rounded-t-sheet bg-sheet shadow-sheet">
+      <div className="relative z-10 mt-[6vh] overflow-hidden rounded-t-sheet bg-sheet">
         <IntroStrip />
         <Capabilities />
         <CaseStudyRows />

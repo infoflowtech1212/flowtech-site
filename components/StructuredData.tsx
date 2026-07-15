@@ -31,7 +31,7 @@ const structuredData = {
           itemOffered: {
             "@type": "SoftwareApplication",
             name: "QR Trax",
-            url: "https://qrtrax.com",
+            url: "https://qrtrax.io",
             applicationCategory: "BusinessApplication",
             description:
               "QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history.",

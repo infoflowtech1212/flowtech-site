@@ -44,7 +44,7 @@ export default function SiteFooter({ base = "" }: { base?: string }) {
         <div className="flex flex-col gap-3">
           <div className="font-mono text-[10.5px] tracking-[.2em] text-teal-bright">PRODUCTS</div>
           <a href="https://doccreate.io" target="_blank" rel="noopener" className="text-[13.5px] text-white/65 hover:text-white">DocCreate · doccreate.io</a>
-          <a href="https://qrtrax.com" target="_blank" rel="noopener" className="text-[13.5px] text-white/65 hover:text-white">QR Trax · qrtrax.com</a>
+          <a href="https://qrtrax.io" target="_blank" rel="noopener" className="text-[13.5px] text-white/65 hover:text-white">QR Trax · qrtrax.io</a>
           <a href="https://prismpm.ai" target="_blank" rel="noopener" className="text-[13.5px] text-white/65 hover:text-white">PRISM · prismpm.ai</a>
         </div>
         <div className="flex flex-col gap-3">

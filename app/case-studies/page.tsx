@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import SiteNav from "@/components/SiteNav";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -94,29 +94,7 @@ export default function CaseStudiesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudiesSchema) }}
       />
-      {/* Sticky dark nav (case-studies variant per prototype) */}
-      <div
-        className="sticky top-0 z-50 flex items-center justify-between border-b border-white/[.08] px-6 py-[22px] backdrop-blur-[8px] md:px-[72px]"
-        style={{ background: "rgba(14,21,23,.92)" }}
-      >
-        <Link href="/" className="flex items-center gap-3 text-lightText">
-          <Image src="/assets/ft-logo.png" alt="FlowTech" width={110} height={30} className="h-[30px] w-auto" priority />
-          <span className="text-[17px] font-bold tracking-[.06em]">FLOWTECH</span>
-        </Link>
-        <div className="hidden gap-8 text-[14px] font-medium md:flex">
-          <a href="/#capabilities" className="text-[rgba(238,243,244,.7)] hover:text-white">Consulting</a>
-          <a href="/#capabilities" className="text-[rgba(238,243,244,.7)] hover:text-white">Capabilities</a>
-          <a href="#top" className="text-teal-bright">Case Studies</a>
-          <a href="/#products" className="text-[rgba(238,243,244,.7)] hover:text-white">Products</a>
-          <a href="/#about" className="text-[rgba(238,243,244,.7)] hover:text-white">About</a>
-        </div>
-        <a
-          href="/#contact"
-          className="rounded-[2px] bg-teal-brand px-[22px] py-2.5 text-[13.5px] font-semibold text-white hover:bg-teal-hover"
-        >
-          Book a call
-        </a>
-      </div>
+      <SiteNav variant="page" />
 
       {/* Header with abstract logo motif */}
       <div className="relative overflow-hidden">
