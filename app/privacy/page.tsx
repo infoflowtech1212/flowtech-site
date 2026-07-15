@@ -4,6 +4,9 @@ import LegalShell, { LegalSection } from "@/components/LegalShell";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How FlowTech collects, uses, and protects information.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 const mail = (

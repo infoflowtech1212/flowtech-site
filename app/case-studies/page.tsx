@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Case Studies",
   description:
     "Engagements with real estate investment and operations teams, from development through management.",
+  alternates: {
+    canonical: "/case-studies",
+  },
 };
 
 const studies = [

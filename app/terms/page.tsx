@@ -4,6 +4,9 @@ import LegalShell, { LegalSection } from "@/components/LegalShell";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms governing use of www.flowtechapps.com.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 const mail = (
