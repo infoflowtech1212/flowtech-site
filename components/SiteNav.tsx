@@ -96,6 +96,13 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
               {l.label}
             </a>
           ))}
+          <a
+            href={`${base}#contact`}
+            onClick={() => setOpen(false)}
+            className="mt-2 inline-block whitespace-nowrap self-start rounded-full border border-[rgba(47,212,230,.5)] px-[22px] py-[9px] text-[12.5px] font-semibold text-teal-bright transition-colors hover:bg-[rgba(47,212,230,.12)] min-[400px]:hidden"
+          >
+            Book a call
+          </a>
         </nav>
       )}
     </header>
