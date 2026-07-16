@@ -80,7 +80,7 @@ export default function Products() {
                 </div>
                 <span
                   className={
-                    "rounded-full border px-2 py-[3px] font-mono text-[9px] " +
+                    "rounded-full border px-2 py-[3px] font-mono text-[11px] " +
                     (p.badgeMuted
                       ? "border-ink/25 text-body-soft"
                       : "border-[rgba(0,151,169,.45)] text-teal-hover")

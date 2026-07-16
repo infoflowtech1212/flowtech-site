@@ -17,7 +17,8 @@ const links = [
  * - variant="home": fixed over the 3D journey (bg rgba(7,14,19,.78))
  * - variant="page": sticky on legal pages (bg rgba(7,14,19,.92)), anchors point back to /
  * Below 900px the link row collapses behind a hamburger toggle placed after
- * "Book a call".
+ * "Book a call". "Book a call" itself is hidden below 400px, where there
+ * isn't room for it next to the logo and hamburger without wrapping.
  */
 export default function SiteNav({ variant = "home" }: { variant?: "home" | "page" }) {
   const isHome = variant === "home";
@@ -47,7 +48,7 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
         <div className="flex items-center gap-3">
           <a
             href={`${base}#contact`}
-            className="rounded-full border border-[rgba(47,212,230,.5)] px-[22px] py-[9px] text-[12.5px] font-semibold text-teal-bright transition-colors hover:bg-[rgba(47,212,230,.12)]"
+            className="hidden whitespace-nowrap rounded-full border border-[rgba(47,212,230,.5)] px-[22px] py-[9px] text-[12.5px] font-semibold text-teal-bright transition-colors hover:bg-[rgba(47,212,230,.12)] min-[400px]:inline-block"
           >
             Book a call
           </a>
@@ -56,7 +57,7 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-full border border-white/[.14] transition-colors hover:border-teal-bright/60 min-[900px]:hidden"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-white/[.14] transition-colors hover:border-teal-bright/60 min-[900px]:hidden"
           >
             <span
               className={
