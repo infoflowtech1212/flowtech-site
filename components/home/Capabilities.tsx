@@ -1,6 +1,6 @@
 import Reveal from "@/components/Reveal";
 
-const items: { n: string; title: string; body: string }[] = [
+export const capabilityItems: { n: string; title: string; body: string }[] = [
   {
     n: "01",
     title: "Systems Integration",
@@ -63,7 +63,7 @@ export default function Capabilities() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((it) => (
+          {capabilityItems.map((it) => (
             <div
               key={it.n}
               className="flex flex-col gap-2 rounded-card bg-white p-[26px] shadow-card"

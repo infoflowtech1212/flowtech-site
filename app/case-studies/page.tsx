@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
+import { CONTENT_LAST_MODIFIED } from "@/lib/site-dates";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -77,17 +78,33 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flowtechapps.com";
 
 const caseStudiesSchema = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  url: `${siteUrl}/case-studies`,
-  name: "Case Studies · FlowTech",
-  isPartOf: { "@id": `${siteUrl}/#website` },
-  breadcrumb: {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
-      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${siteUrl}/case-studies` },
-    ],
-  },
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/case-studies`,
+      url: `${siteUrl}/case-studies`,
+      name: "Case Studies · FlowTech",
+      dateModified: CONTENT_LAST_MODIFIED,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      breadcrumb: {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+          { "@type": "ListItem", position: 2, name: "Case Studies", item: `${siteUrl}/case-studies` },
+        ],
+      },
+      hasPart: studies.map((_, i) => ({ "@id": `${siteUrl}/case-studies#study-${i + 1}` })),
+    },
+    ...studies.map((s, i) => ({
+      "@type": "CreativeWork",
+      "@id": `${siteUrl}/case-studies#study-${i + 1}`,
+      name: s.title,
+      dateModified: CONTENT_LAST_MODIFIED,
+      isPartOf: { "@id": `${siteUrl}/case-studies` },
+      about: s.tags.join(", "),
+      description: `${s.challenge} ${s.approach} ${s.outcome}`,
+    })),
+  ],
 };
 
 export default function CaseStudiesPage() {

@@ -9,7 +9,13 @@ Founder & Principal: Prashanth Rayapudi, who has spent more than 25 years runnin
 ## Site
 
 - [Homepage](https://flowtechapps.com/): Overview, capabilities, case studies, products, founder background, FAQ
-- [Case Studies](https://flowtechapps.com/case-studies): Engagements in asset transitions, unit lifecycle workflow, purchasing programs, and analytics/dashboards
+- [Capabilities](https://flowtechapps.com/#capabilities): Systems integration, data analytics & dashboards, workflow automation, inventory & asset management, software development, AI integration, process design & SOPs, data governance & security
+- [Case Studies (preview)](https://flowtechapps.com/#work): Homepage preview of engagement work
+- [Case Studies](https://flowtechapps.com/case-studies): Full write-ups of engagements in asset transitions, unit lifecycle workflow, purchasing programs, and analytics/dashboards
+- [Products](https://flowtechapps.com/#products): DocCreate, QR Trax, and PRISM
+- [About / Founder](https://flowtechapps.com/#about): Prashanth Rayapudi's background
+- [FAQ](https://flowtechapps.com/#faq): See FAQ section below
+- [Contact](https://flowtechapps.com/#contact): Discovery call booking
 
 ## Products
 
@@ -18,3 +24,14 @@ A dedicated arm of FlowTech develops its own proprietary software, which can be 
 - [DocCreate](https://doccreate.io): Automated document creation with e-signatures, cloud sync, and image capture (monday.com marketplace)
 - [QR Trax](https://qrtrax.io): QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history
 - [PRISM](https://prismpm.ai): Property intelligence system, a full operating system for real estate teams (coming soon)
+
+## FAQ
+
+- **What does FlowTech specialize in?** Business strategy consulting for real estate investment and operations teams. Under one engagement we deliver systems integration, workflow automation, data analytics, inventory and asset management, custom software, and AI, always starting from strategy, not software.
+- **What types of organizations do you work with?** Owners, operators, developers, property managers, and investment teams, from regional operators to multi-entity enterprises.
+- **Do we need to replace the systems we already use, like Yardi or AppFolio?** No. We layer onto the platforms you're already paying for, property management, CRM, finance, and work management, enhancing them so information flows between them. No rip-and-replace, no disruption to daily operations.
+- **What types of workflows can you automate?** Anything repetitive and rule-based: asset transitions, unit make-ready and turn, approvals, document generation, owner and lender reporting, field inspections, and inventory or vehicle tracking.
+- **How do you identify which processes to fix first?** Through a discovery engagement: sitting with the team to understand pain points, running an end-to-end forensic analysis, and delivering a phased plan sequenced by impact and priority.
+- **How secure is our data?** Data governance and security are reviewed diligently in every engagement: who owns the data, where it lives, and how it moves. Solutions are built compliance-aware, with resident and financial data handled to GDPR and CCPA standards.
+- **How long does implementation take?** Discovery typically runs a few weeks; implementation is phased against priorities so value lands early. Simple automations can be live in days; full platform integrations roll out in planned phases.
+- **Will our teams need training?** Minimal, by design, since the work happens inside tools teams already use. Where training helps, it's provided as part of rollout.

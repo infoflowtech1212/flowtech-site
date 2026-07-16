@@ -25,7 +25,7 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
   const [open, setOpen] = useState(false);
 
   return (
-    <div
+    <header
       className={
         (isHome ? "fixed inset-x-0 top-0" : "sticky top-0") +
         " z-50 border-b border-white/[.06] backdrop-blur-[12px]"
@@ -37,13 +37,13 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
           <Image src="/assets/ft-logo.png" alt="FlowTech" width={96} height={26} className="h-[26px] w-auto" priority />
           <span className="text-[15px] font-bold tracking-[.08em]">FLOWTECH</span>
         </Link>
-        <div className="hidden gap-[26px] text-[13px] font-medium min-[900px]:flex">
+        <nav aria-label="Primary" className="hidden gap-[26px] text-[13px] font-medium min-[900px]:flex">
           {links.map((l) => (
             <a key={l.label} href={`${base}${l.href}`} className="text-[rgba(238,243,244,.75)] transition-colors hover:text-white">
               {l.label}
             </a>
           ))}
-        </div>
+        </nav>
         <div className="flex items-center gap-3">
           <a
             href={`${base}#contact`}
@@ -80,7 +80,8 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
         </div>
       </div>
       {open && (
-        <div
+        <nav
+          aria-label="Mobile"
           className="flex flex-col gap-1 border-t border-white/[.06] px-6 py-4 min-[900px]:hidden"
           style={{ background: "rgba(7,14,19,.96)" }}
         >
@@ -94,8 +95,8 @@ export default function SiteNav({ variant = "home" }: { variant?: "home" | "page
               {l.label}
             </a>
           ))}
-        </div>
+        </nav>
       )}
-    </div>
+    </header>
   );
 }

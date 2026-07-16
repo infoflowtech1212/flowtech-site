@@ -7,8 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "geo": "node scripts/generate-geo.mjs"
+    "geo": "node scripts/generate-geo.mjs",
+    "indexnow": "node scripts/indexnow-submit.mjs"
   },
+  "browserslist": [
+    "chrome >= 100",
+    "firefox >= 100",
+    "safari >= 15",
+    "edge >= 100"
+  ],
   "dependencies": {
     "@react-three/drei": "^9.114.3",
     "@react-three/fiber": "^8.17.10",

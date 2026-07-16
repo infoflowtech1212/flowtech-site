@@ -1,7 +1,11 @@
+import { capabilityItems } from "@/components/home/Capabilities";
+import { CONTENT_LAST_MODIFIED } from "@/lib/site-dates";
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flowtechapps.com";
 
 // Every string below is copied verbatim from existing on-page copy
-// (Founder.tsx, Products.tsx, Faq.tsx, layout.tsx metadata) — no new claims added.
+// (Founder.tsx, Products.tsx, Capabilities.tsx, Faq.tsx, layout.tsx metadata) —
+// no new claims added.
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -10,6 +14,8 @@ const structuredData = {
       "@id": `${siteUrl}/#organization`,
       name: "FlowTech",
       url: siteUrl,
+      logo: `${siteUrl}/assets/ft-logo.png`,
+      image: `${siteUrl}/assets/ft-logo.png`,
       description:
         "Business strategy consulting for real estate investment and operations teams. Strategy first. Systems that follow.",
       email: "info@flowtechapps.com",
@@ -22,6 +28,7 @@ const structuredData = {
             name: "DocCreate",
             url: "https://doccreate.io",
             applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
             description:
               "Automated document creation with e-signatures, cloud sync, and image capture.",
           },
@@ -33,22 +40,37 @@ const structuredData = {
             name: "QR Trax",
             url: "https://qrtrax.io",
             applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
             description:
               "QR codes for inventory, vehicle, and service tracking. One scan connects an asset to its history.",
           },
         },
         {
           "@type": "Offer",
+          availability: "https://schema.org/PreOrder",
           itemOffered: {
             "@type": "SoftwareApplication",
             name: "PRISM",
             url: "https://prismpm.ai",
             applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
             description: "Property intelligence system: a full operating system for real estate teams.",
-            releaseNotes: "Coming soon",
           },
         },
       ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Consulting Capabilities",
+        itemListElement: capabilityItems.map((it) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: it.title,
+            description: it.body,
+            provider: { "@id": `${siteUrl}/#organization` },
+          },
+        })),
+      },
       sameAs: ["https://www.linkedin.com/company/flowtechapps"],
     },
     {
@@ -56,6 +78,8 @@ const structuredData = {
       "@id": `${siteUrl}/#founder`,
       name: "Prashanth Rayapudi",
       jobTitle: "Founder & Principal",
+      image: `${siteUrl}/assets/founder-headshot.jpg`,
+      url: `${siteUrl}/#about`,
       description:
         "Has spent more than 25 years running real estate operations as both an owner and an operator, across hospitality, multifamily, and single family, overseeing portfolios representing $5 billion in assets.",
       worksFor: { "@id": `${siteUrl}/#organization` },
@@ -65,6 +89,7 @@ const structuredData = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "FlowTech",
+      dateModified: CONTENT_LAST_MODIFIED,
       publisher: { "@id": `${siteUrl}/#organization` },
     },
     {
