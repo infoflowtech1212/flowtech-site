@@ -2,23 +2,30 @@
 
 import { useEffect, useState } from "react";
 
-export type JourneyMode = "3d" | "fallback" | null;
+export type JourneyMode = "3d" | "no-webgl" | "reduced-motion" | null;
 
 function canCreateWebGL(): boolean {
+  // Each getContext() call locks a canvas's context mode, even on failure —
+  // reusing one canvas for both attempts would make a failed webgl2 probe
+  // force the webgl fallback probe to fail too. Use a fresh canvas per try.
   try {
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
-    return !!gl;
+    if (document.createElement("canvas").getContext("webgl2")) return true;
   } catch {
-    return false;
+    // ignore, fall through to webgl probe
   }
+  try {
+    if (document.createElement("canvas").getContext("webgl")) return true;
+  } catch {
+    // ignore
+  }
+  return false;
 }
 
 /**
  * Decides whether to run the WebGL journey or the static fallback:
- * - prefers-reduced-motion → fallback
- * - no usable WebGL context (unsupported browser, disabled GPU, sandboxed
- *   renderer, etc.) → fallback
+ * - prefers-reduced-motion → fallback (accessibility choice, not a GPU issue)
+ * - no usable WebGL context (unsupported browser, disabled hardware
+ *   acceleration, sandboxed renderer, etc.) → fallback
  * Returns null until resolved on the client (avoids SSR mismatch).
  */
 export function useJourneyMode(): JourneyMode {
@@ -28,7 +35,11 @@ export function useJourneyMode(): JourneyMode {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const decide = () => {
-      setMode(reduced.matches || !canCreateWebGL() ? "fallback" : "3d");
+      if (reduced.matches) {
+        setMode("reduced-motion");
+        return;
+      }
+      setMode(canCreateWebGL() ? "3d" : "no-webgl");
     };
 
     decide();

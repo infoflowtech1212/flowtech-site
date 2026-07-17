@@ -29,6 +29,35 @@ export default function Journey() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [webglFailed, setWebglFailed] = useState(false);
 
+  // Global safety net: @react-three/fiber drives frames via
+  // requestAnimationFrame, outside React's render/commit cycle, so a WebGL
+  // failure there (e.g. context lost mid-session) throws as an uncaught
+  // global error that WebGLErrorBoundary below can never see. Catch it here
+  // and drop to the static fallback instead of letting it crash the app.
+  useEffect(() => {
+    if (mode !== "3d" || webglFailed) return;
+    const looksWebglRelated = (s: string) => /webgl|three\.js/i.test(s);
+
+    const onError = (e: ErrorEvent) => {
+      if (looksWebglRelated(e.message) || looksWebglRelated(String(e.error))) {
+        e.preventDefault();
+        setWebglFailed(true);
+      }
+    };
+    const onRejection = (e: PromiseRejectionEvent) => {
+      if (looksWebglRelated(String(e.reason))) {
+        e.preventDefault();
+        setWebglFailed(true);
+      }
+    };
+    window.addEventListener("error", onError);
+    window.addEventListener("unhandledrejection", onRejection);
+    return () => {
+      window.removeEventListener("error", onError);
+      window.removeEventListener("unhandledrejection", onRejection);
+    };
+  }, [mode, webglFailed]);
+
   // master scrub — only when the 3D journey is live
   useEffect(() => {
     if (mode !== "3d" || webglFailed) return;
@@ -59,7 +88,8 @@ export default function Journey() {
 
   // Until the client decides, render nothing journey-specific below the hero
   // copy to avoid a WebGL flash on devices that will fall back.
-  if (mode === "fallback" || webglFailed) return <FallbackJourney />;
+  if (mode === "reduced-motion") return <FallbackJourney />;
+  if (mode === "no-webgl" || webglFailed) return <FallbackJourney showWebglNotice />;
 
   return (
     <div ref={wrapRef}>
@@ -99,7 +129,7 @@ export default function Journey() {
  * subtle teal atmosphere, then the same client-approved chapter copy as
  * ordinary scroll sections.
  */
-function FallbackJourney() {
+function FallbackJourney({ showWebglNotice = false }: { showWebglNotice?: boolean }) {
   return (
     <div className="relative overflow-hidden bg-dark-journey">
       {/* static atmosphere in place of the WebGL scene */}
@@ -114,6 +144,13 @@ function FallbackJourney() {
         }}
       />
       <div className="relative">
+        {showWebglNotice && (
+          <div className="relative z-10 mx-[7vw] mt-6 max-w-[540px] rounded-card border border-teal-bright/25 bg-[rgba(13,26,33,.65)] px-5 py-3.5 font-mono text-[12px] leading-relaxed text-[rgba(238,243,244,.75)]">
+            Your browser can&apos;t render our interactive 3D view, so you&apos;re seeing the
+            static version below — everything still works. Enabling hardware acceleration in
+            your browser&apos;s settings will restore the animation.
+          </div>
+        )}
         <ChapterHero overlay={false} />
         <Chapter1 overlay={false} />
         <Chapter2 overlay={false} />
