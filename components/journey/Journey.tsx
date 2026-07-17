@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setProgress } from "./scrollState";
 import { useJourneyMode } from "./useJourneyMode";
+import { WebGLErrorBoundary } from "./WebGLErrorBoundary";
 import ProgressRail from "./ProgressRail";
 import { ChapterHero, Chapter1, Chapter2, Chapter3, Chapter4 } from "./Chapters";
 
@@ -26,10 +27,11 @@ const JourneyScene = dynamic(() => import("./Scene"), { ssr: false });
 export default function Journey() {
   const mode = useJourneyMode();
   const wrapRef = useRef<HTMLDivElement>(null);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   // master scrub — only when the 3D journey is live
   useEffect(() => {
-    if (mode !== "3d") return;
+    if (mode !== "3d" || webglFailed) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const st = ScrollTrigger.create({
@@ -53,16 +55,16 @@ export default function Journey() {
       clearTimeout(t);
       st.kill();
     };
-  }, [mode]);
+  }, [mode, webglFailed]);
 
   // Until the client decides, render nothing journey-specific below the hero
   // copy to avoid a WebGL flash on devices that will fall back.
-  if (mode === "fallback") return <FallbackJourney />;
+  if (mode === "fallback" || webglFailed) return <FallbackJourney />;
 
   return (
     <div ref={wrapRef}>
       {mode === "3d" && (
-        <>
+        <WebGLErrorBoundary onError={() => setWebglFailed(true)}>
           <div className="fixed inset-0 z-0">
             <Canvas
               dpr={[1, 2]}
@@ -81,7 +83,7 @@ export default function Journey() {
             }}
           />
           <ProgressRail />
-        </>
+        </WebGLErrorBoundary>
       )}
       <ChapterHero />
       <Chapter1 />
