@@ -144,18 +144,74 @@ function FallbackJourney({ showWebglNotice = false }: { showWebglNotice?: boolea
         }}
       />
       <div className="relative">
-        {showWebglNotice && (
-          <div className="relative z-10 mx-[7vw] mt-6 max-w-[540px] rounded-card border border-teal-bright/25 bg-[rgba(13,26,33,.65)] px-5 py-3.5 font-mono text-[12px] leading-relaxed text-[rgba(238,243,244,.75)]">
-            Your browser can&apos;t render our interactive 3D view, so you&apos;re seeing the
-            static version below — everything still works. Enabling hardware acceleration in
-            your browser&apos;s settings will restore the animation.
-          </div>
-        )}
+        {showWebglNotice && <WebglNoticeModal />}
         <ChapterHero overlay={false} />
         <Chapter1 overlay={false} />
         <Chapter2 overlay={false} />
         <Chapter3 overlay={false} />
         <Chapter4 overlay={false} />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Popup alert shown once when we've fallen back because WebGL isn't
+ * available. Sits above everything (including the fixed nav) as a centered
+ * modal with a backdrop, so it can never end up clipped or hidden.
+ */
+function WebglNoticeModal() {
+  const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm"
+      onClick={() => setOpen(false)}
+    >
+      <div
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="webgl-notice-title"
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-[420px] rounded-card border border-teal-bright/25 bg-[rgba(13,26,33,.97)] px-6 py-6 shadow-[0_24px_60px_rgba(0,0,0,.55)]"
+      >
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={() => setOpen(false)}
+          className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full border border-white/[.14] text-[rgba(238,243,244,.6)] transition-colors hover:border-teal-bright/60 hover:text-white"
+        >
+          ✕
+        </button>
+        <div
+          id="webgl-notice-title"
+          className="mb-2 pr-6 font-mono text-[13px] font-semibold text-teal-bright"
+        >
+          Interactive 3D view unavailable
+        </div>
+        <p className="font-mono text-[12px] leading-relaxed text-[rgba(238,243,244,.8)]">
+          Your browser can&apos;t render our interactive 3D view, so you&apos;re seeing the
+          static version below — everything still works. Enabling hardware acceleration in
+          your browser&apos;s settings will restore the animation.
+        </p>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="mt-5 w-full rounded-full border border-teal-bright/50 py-2.5 font-mono text-[12.5px] font-semibold text-teal-bright transition-colors hover:bg-[rgba(47,212,230,.12)]"
+        >
+          Got it
+        </button>
       </div>
     </div>
   );
