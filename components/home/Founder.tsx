@@ -13,14 +13,24 @@ export default function Founder() {
             height={360}
             className="block h-[360px] w-[300px] rounded-2xl object-cover object-top"
           />
-          <div className="flex w-[300px] justify-center gap-8">
+          <div className="grid w-[300px] grid-cols-3 gap-3">
             <div className="text-center">
-              <div className="text-[24px] font-extrabold text-teal-brand">25+</div>
-              <div className="text-[11.5px] text-muted">years operating</div>
+              <div className="text-[22px] font-extrabold text-teal-brand">25+</div>
+              <div className="mt-1 font-mono text-[9.5px] uppercase tracking-[.1em] text-muted">
+                Years Operating
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-[24px] font-extrabold text-teal-brand">$5B</div>
-              <div className="text-[11.5px] text-muted">assets overseen</div>
+              <div className="text-[22px] font-extrabold text-teal-brand">$25B</div>
+              <div className="mt-1 font-mono text-[9.5px] uppercase tracking-[.1em] text-muted">
+                Overseen &amp; Advised
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-[22px] font-extrabold text-teal-brand">400+</div>
+              <div className="mt-1 font-mono text-[9.5px] uppercase tracking-[.1em] text-muted">
+                Buildings Scaled
+              </div>
             </div>
           </div>
         </div>
